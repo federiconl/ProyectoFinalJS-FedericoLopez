@@ -1,0 +1,101 @@
+[
+    {
+        "nombre": "Alimento balanceado sabor carne y cereales",
+        "marca": "Apolo",
+        "edad": "adulto",
+        "categoria": "Alimento seco para perro",
+        "id": 0,
+        "peso": "20 kg",
+        "precio": 1500,
+        "valoracion": 7,
+        "pic": "./img/1.png"
+    },
+    {
+        "nombre": "Alimento balanceado para razas medianas",
+        "marca": "Biofresh",
+        "edad": "adulto ",
+        "categoria": "Alimento seco para perro",
+        "id": 1,
+        "peso": "15 kg",
+        "precio": 1450,
+        "valoracion": 9,
+        "pic": "./img/2.jpg"
+    },
+    {
+        "nombre": "Alimento balanceado +8 años, raza pequeña ",
+        "marca": "Birbo",
+        "edad": "adulto",
+        "categoria": "Alimento seco para perro",
+        "id": 2,
+        "peso": "20 kg",
+        "precio": 1500,
+        "valoracion": 4,
+        "pic": "./img/3.png"
+    },
+    {
+        "nombre": "Alimento balanceado PREMIUM sabor Pollo",
+        "marca": "Birbo",
+        "edad": "cachorro",
+        "categoria": "Alimento seco para perro",
+        "id": 3,
+        "peso": "7 kg",
+        "precio": 990,
+        "valoracion": 10,
+        "pic": "./img/4.jpg"
+    },
+    {
+        "nombre": "Alimento balanceado sabor pescado",
+        "marca": "Michu",
+        "edad": "adulto",
+        "categoria": "Alimento seco para gato",
+        "id": 4,
+        "peso": "25 kg",
+        "precio": 1200,
+        "valoracion": 6,
+        "pic": "./img/5.jpg"
+    },
+    {
+        "nombre": "Alimento balanceado sabor salmon",
+        "marca": "Biofresh",
+        "edad": "cachorro",
+        "categoria": "Alimento seco para gato",
+        "id": 5,
+        "peso": "20 kg",
+        "precio": 1500,
+        "valoracion": 7,
+        "pic": "./img/6.png"
+    },
+    {
+        "nombre": "Alimento balanceado sabor pollo y arroz",
+        "marca": "Matisse",
+        "edad": "cachorro",
+        "categoria": "Alimento seco para gato",
+        "id": 6,
+        "peso": "10kg",
+        "precio": 1200,
+        "valoracion": 6,
+        "pic": "./img/7.jpg"
+    },
+    {
+        "nombre": "Bifecitos sabor carne",
+        "marca": "Pedigree",
+        "edad": "adulto",
+        "categoria": "Alimento humedo para perro",
+        "id": 7,
+        "peso": "150 gr",
+        "precio": 150,
+        "valoracion": 10,
+        "pic": "./img/8.webp"
+    },
+    {
+        "nombre": "Bifecitos sabor pescado",
+        "marca": "CatChow",
+        "edad": "adulto",
+        "categoria": "Alimento humedo para gato",
+        "id": 8,
+        "peso": "120 gr",
+        "precio": 130,
+        "valoracion": 8,
+        "pic": "./img/9.jpg"
+    }
+]
