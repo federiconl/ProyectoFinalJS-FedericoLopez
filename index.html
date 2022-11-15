@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="#">
-    <title>Document</title>
+    <title>prueba oficial
+    </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
@@ -16,7 +17,7 @@
     <header>
         <nav id="loginBar" class="navbar navbar-light loginBar">
             <div class="container-fluid">
-                <h1>De patitas a la</h1>
+                <h1>De patitas a la casa</h1>
                 <form class="d-flex">
 
                     <button id="btnModalLogin" class="btn btn-outline-primary me-2 toggles" type="button"
@@ -35,10 +36,8 @@
         <section id="guest" class="toggles">
             <h2>Contenido para invitados</h2>
             <p>Si querés comprar, por favor <a class="fakeAncla" data-bs-toggle="modal"
-                    data-bs-target="#modalLogin">inicia sesion</a></p>
-
-
-
+                    data-bs-target="#modalLogin">inicia sesion</a>
+            </p>
             <div class="modal " id="modalLogin" tabindex="-1" aria-labelledby="modalLoginLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -68,42 +67,97 @@
 
         </section>
 
-        <section id="logged" class="d-none toggles">
-            <h2>Contenido para usuarios logueados</h2>
-            <p>Te mostramos nuestros productos.</p>
-            <div id="tarjetas" class="card-group">
-                
+        <section id="logged" class=" d-none toggles">
+            <div class="container">
+                <h1>Productos</h1>
+                <p>Te mostramos nuestros productos.</p>
+              
             </div>
+
+            <template id="templateTarjetas" class="container  card-group">
+                <div class="col-12 mb-2 col-md-4">
+                    <div class="card">
+                        <img src="" alt="" class="card-img-top">
+                        <div class="card-body">
+                            <h5>Titulo</h5>
+                            <p id="precio">Precio</p>
+                            <p id="categoria">Categoria</p>
+                            <p id="edad">Edad</p>
+                            <p id="peso">Peso</p>
+                            <button class="btn btn-dark">Comprar</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </template>
         </section>
 
-        <div class="container">
-            <div class="row">
-                <main id="items" class="col-sm-8 row">
-
-                </main>
-
-                <aside class="col-sm-4 d-none toggles">
-                    <h2>Carrito</h2>
-                    <ul id="carrito" class="list-group  ">
-        
-                    </ul>
-                    <hr>
-
-                    <p class="text-right">Total: <span id="total"></span></p>
-                    <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
-                </aside>
-            </div>
+        <div class="container d-none toggles" id="logged">
+            <h4>Carrito de compras</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Precio(c/u)</th>
+                        <th scope="col">Acción</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="items"></tbody>
+                <tfoot>
+                    <tr id="footer">
+                        <th scope="row" colspan="5">Carrito vacío - comience a comprar!</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <h4>Cards</h4>
+            <div class="row" id="cards"></div>
         </div>
-    </main>
+        
+        
+        <template id="template-carrito">
+            <tr>
+                <th scope="row">id</th>
+                <td id="nameCarrito">Café</td>
+                <td id="cantCarrito">1</td>
+                <td id="precioUCarrito">1</td>
+                <td>
+                    <button class="btn btn-info btn-sm">
+                        +
+                    </button>
+                    <button class="btn btn-danger btn-sm">
+                        -
+                    </button>
+                </td>
+                <td>$ <span id="precioTotalCarrito"></span></td>
+            </tr>
+        </template>
+        <template id="template-footer">
+            <th scope="row" colspan="2">Total productos</th>
+            <td>10</td>
+            <td>
+                <button class="btn btn-danger btn-sm" id="vaciar-carrito">
+                    vaciar todo
+                </button>
+            </td>
+            <td class="font-weight-bold">$ <span>5000</span></td>
+        </template>
+    </div>
+</main>
 
 
     }
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
         </script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/script.js"></script>
 </body>
 
 </html>
+
+

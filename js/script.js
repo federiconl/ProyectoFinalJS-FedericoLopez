@@ -5,7 +5,21 @@ const mailLogin = document.getElementById('emailLogin'),
     modalEl = document.getElementById('modalLogin'),
     modal = new bootstrap.Modal(modalEl),
     contTarjetas = document.getElementById('tarjetas'),
-    toggles = document.querySelectorAll('.toggles');
+    toggles = document.querySelectorAll('.toggles'),
+    cards = document.getElementById('cards'),
+    items = document.getElementById('items'),
+    footer = document.getElementById('footer'),
+    templateTarjetas = document.getElementById('templateTarjetas').content,
+    templateFooter=document.getElementById('template-footer').content,
+    templateCarrito=document.getElementById('template-carrito').content,
+    fragment=document.createDocumentFragment();
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchData()
+})
+cards.addEventListener('click',e=>{
+    agregarCarrito(e)
+})
 const usuarios = [{
     nombre: 'Agustina',
     mail: 'agus.nieto@mail.com',
@@ -21,79 +35,6 @@ const usuarios = [{
     mail: 'rodoyo@mail.com',
     pass: 'crovarabasquet'
 }]
-
-
-function cargarCatalogoDeArchivoJson() {
-    const catalogoJson = `.js/data.json`;
-
-    fetch(catalogoJson)
-        .then((respuesta) => respuesta.json()) //Respuesta del servidor
-        .then((datos) => {
-            console.log("Catalogo de Archivo JSON Cargando...");
-
-            datos.forEach((producto) => {
-                listaStock.push(producto);
-            });
-        })
-
-        .finally(() => {
-            console.log("Carga Finalizada...");
-            console.log(listaStock);
-        });
-}
-
-let carrito = []
-function crearHTML(productos) {
-    contTarjetas.innerHTML = '';
-    productos.forEach((prod) => {
-        const tarjeta = `<div class="card" style="width: 18rem;" id="card ${prod.nombre}">
-        <img src="${prod.pic}" class="card-img-top" alt="${prod.nombre}">
-        <div class="card-body">
-                 <h5 class="card-title">${prod.nombre}</h5>
-                 <p class="card-text">${prod.categoria} ${prod.edad}. Marca: ${prod.marca}</p>
-               </div>
-               <ul class="list-group list-group-flush">
-                 <li class="list-group-item">Peso: ${prod.peso}</li>
-                 <li class="list-group-item">Precio: $ ${prod.precio}</li>
-                 <li class="list-group-item">Valoracion: ${prod.valoracion} puntos.</li>
-               </ul>
-               <button class="btn btn-primary " type="submit" id="sumaCarrito">Añadir al carrito</button>
-               
-             </div> `;
-        contTarjetas.innerHTML += tarjeta;
-
-        
-
-    })
-   
-}
-
-const comprar = document.getElementById('sumaCarrito');
-comprar.addEventListener('click',(e)=>{
-    e.preventDefault()
-    carrito.push({
-        id: prod.id,
-        img: prod.pic,
-        nombre: prod.nombre,
-        precio: prod.precio,
-    });
-    console(carrito)
-});
-
-
-
-async function bringData() {
-    const respuesta = await fetch('./js/data.json');
-    const datos = await respuesta.json();
-
-    console.log(datos)
-
-    crearHTML(datos);
-}
-
-
-bringData();
-
 
 
 function validarUsuario(usersDB, user, pass) {
@@ -197,5 +138,96 @@ btnLogout.addEventListener('click', () => {
 
 
 window.onload = () => estaLogueado(recuperarUsuario(localStorage));
+
+
+
+function cargarCatalogoDeArchivoJson() {
+    const catalogoJson = `.js/data.json`;
+
+    fetch(catalogoJson)
+        .then((respuesta) => respuesta.json())
+        .then((datos) => {
+
+
+            datos.forEach((producto) => {
+                listaStock.push(producto);
+            });
+        })
+}
+
+
+const fetchData=async()=>{
+    try {
+        const respuesta = await fetch('./js/data.json');
+        const data = await respuesta.json();
+        crearCards(data)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+let carrito = []
+
+const crearCards = data => {
+    data.forEach(producto => {
+        
+        templateTarjetas.querySelector('h5').textContent = `${producto.nombre} "${producto.marca}"`
+        templateTarjetas.getElementById('categoria').textContent =`${producto.categoria}`
+        templateTarjetas.getElementById('precio').textContent =`$ ${producto.precio}`
+        templateTarjetas.getElementById('edad').textContent =`Para: ${producto.edad}`
+        templateTarjetas.getElementById('peso').textContent =`Peso neto: ${producto.peso}`
+        templateTarjetas.querySelector('img').setAttribute("src",producto.pic)
+        templateTarjetas.querySelector('.btn-dark').dataset.id= producto.id
+
+        const clone = templateTarjetas.cloneNode(true)
+        fragment.appendChild(clone)
+
+    })
+    cards.appendChild(fragment)
+
+}
+
+const agregarCarrito = e => {
+
+    if(e.target.classList.contains('btn-dark')){
+        progCarrito(e.target.parentElement)
+    }
+    e.stopPropagation()
+}
+
+const progCarrito = objeto =>{
+    const producto= {
+        id: objeto.querySelector('.btn-dark').dataset.id,
+        nombre: objeto.querySelector('h5').textContent,
+        precio: objeto.querySelector('#precio').textContent,
+        cantidad: 1
+    }
+    if(carrito.hasOwnProperty(producto.id)){
+        producto.cantidad= carrito[producto.id].cantidad + 1
+    }
+
+    carrito[producto.id]={...producto}
+    crearCarrito()
+}
+
+const crearCarrito = ()=>{
+    items.innerHTML=''
+    Object.values(carrito).forEach(producto =>{
+        templateCarrito.querySelector('th').textContent =producto.id
+        templateCarrito.querySelector('#nameCarrito').textContent=producto.nombre
+        templateCarrito.querySelector('#cantCarrito').textContent=producto.cantidad
+        templateCarrito.querySelector('#precioUCarrito').textContent=producto.precio
+        templateCarrito.querySelector('#precioTotalCarrito').textContent= producto.cantidad*producto.precio
+        
+        templateCarrito.querySelector('.btn-info').dataset.id= producto.id
+        templateCarrito.querySelector('.btn-danger').dataset.id= producto.id
+        
+        const clone= templateCarrito.cloneNode(true)
+        fragment.appendChild(clone)
+    })
+    
+    items.appendChild(fragment)
+    
+}
 
 
